@@ -1,30 +1,34 @@
 import express, { Request, Response } from 'express';
-// import { Prisma, PrismaClient } from '@prisma/client'
 import DTO from './address.dto';
 import isLogin from '../../middleware/isLogin';
-import type { AddressParam, AddressCRequest, AddressRequest } from './address.entities';
-const app = express();
+import type { AddressParam, AddressCRequest, AddressURequest } from './address.entities';
+import addressService from './address.service';
 const router = express.Router();
-// const prisma = new PrismaClient()
 
 router.get('/',isLogin, async (req: Request, res: Response) => {
-
+    const { status, message } = await addressService.AddressGetService(req);
+    return res.status(status).json({ message });
 });
 
 router.get('/:id',isLogin, async (req: AddressParam, res: Response) => {
-
+    const { status, message } = await addressService.AddressGetOneService(req);
+    return res.status(status).json({ message });
 });
 
-router.post('/',isLogin, DTO.AddressCDTO ,async (req: AddressRequest, res: Response) => {
-
+router.post('/',isLogin, DTO.AddressCDTO ,async (req: AddressCRequest, res: Response) => {
+    const { status, message } = await addressService.AddressCreateService(req);
+    return res.status(status).json({ message });
 });
 
-router.put('/',isLogin,DTO.AddressUDTO, async (req: AddressCRequest, res: Response) => {
+router.put('/',isLogin,DTO.AddressUDTO, async (req: AddressURequest, res: Response) => {
+    const { status, message } = await addressService.AddressUpdateService(req);
+    return res.status(status).json({ message });
 
 });
 
 router.delete('/',isLogin,DTO.AddressDDTO, async(req: AddressParam,res: Response) => {
+    const { status, message } = await addressService.AddressDeleteService(req);
+    return res.status(status).json({ message });
 
-})
-
+});
 module.exports = router;

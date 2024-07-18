@@ -1,16 +1,16 @@
 import { Request } from "express";
 
- interface Address {
+interface Address {
     nameReceiver: string;
     phoneReceiver: string;
     country: string;
     province: string;
     district: string;
     subDistrict: string;
-    postalCode: number;
+    postalCode: string;
     addressDetail: string;
 }
 
-export type AddressCRequest = Request<{ id: string }, never, Address>;
-export type AddressRequest = Request<never, never, Address>;
+export type AddressURequest = Request<{ id: string }, never, Address>;
+export type AddressCRequest = Request<never, never, Address>;
 export type AddressParam = Request<{ id: string }>;
