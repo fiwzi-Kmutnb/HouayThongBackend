@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { ServiceReponse } from "../../entities/interface";
 import { AddressCRequest, AddressURequest,AddressParam } from "./address.entities";
-import { Prisma, PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 const AddressCreateService = async (req: AddressCRequest): Promise<ServiceReponse> => {

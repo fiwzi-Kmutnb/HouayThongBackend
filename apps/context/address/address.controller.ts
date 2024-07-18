@@ -5,28 +5,28 @@ import type { AddressParam, AddressCRequest, AddressURequest } from './address.e
 import addressService from './address.service';
 const router = express.Router();
 
-router.get('/',isLogin, async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
     const { status, message } = await addressService.AddressGetService(req);
     return res.status(status).json({ message });
 });
 
-router.get('/:id',isLogin, async (req: AddressParam, res: Response) => {
+router.get('/:id', async (req: AddressParam, res: Response) => {
     const { status, message } = await addressService.AddressGetOneService(req);
     return res.status(status).json({ message });
 });
 
-router.post('/',isLogin, DTO.AddressCDTO ,async (req: AddressCRequest, res: Response) => {
+router.post('/', DTO.AddressCDTO ,async (req: AddressCRequest, res: Response) => {
     const { status, message } = await addressService.AddressCreateService(req);
     return res.status(status).json({ message });
 });
 
-router.put('/',isLogin,DTO.AddressUDTO, async (req: AddressURequest, res: Response) => {
+router.put('/',DTO.AddressUDTO, async (req: AddressURequest, res: Response) => {
     const { status, message } = await addressService.AddressUpdateService(req);
     return res.status(status).json({ message });
 
 });
 
-router.delete('/',isLogin,DTO.AddressDDTO, async(req: AddressParam,res: Response) => {
+router.delete('/',DTO.AddressDDTO, async(req: AddressParam,res: Response) => {
     const { status, message } = await addressService.AddressDeleteService(req);
     return res.status(status).json({ message });
 

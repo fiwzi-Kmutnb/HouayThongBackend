@@ -1,13 +1,8 @@
-declare namespace Express {
-    interface Request {
-        users: {
-            id: string;
-            prefix: string;
-            firstName: string;
-            lastName: string;
-            email: string;
-            phone: string;
-            idLine: string;
-        };
+import { User } from "../entities/interface"
+declare global {
+    namespace Express {
+        interface Request {
+            users: User
+        }
     }
 }

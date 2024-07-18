@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express';
 
-export default function isLogin(req: Request, res: Response, next: NextFunction) {
+export default function isLogin(req: Request<never,never,never,never,never>, res: Response, next: NextFunction) {
     const token = req.headers['authorization']
     if (!token) {
         return res.status(401).json({
@@ -29,8 +29,30 @@ export default function isLogin(req: Request, res: Response, next: NextFunction)
                 status: "warning",
                 message: "กรุณาเข้าสู่ระบบใหม่"
             })
-        }
-        req.users = decoded;
+        } 
+        req.users = decoded as any
+
+        // req.users = {
+        //     id: decoded?.id,
+        //     prefix: decoded?.prefix,
+        //     firstName: decoded?.firstname,
+        //     lastName: decoded?.lastName,
+        //     email: decoded?.email,
+        //     phone: decoded?.phone,
+        //     idLine: decoded?.idLine
+        // }
+        // req.users
+        // req.conf
+        // req.users = {
+        //     id: decoded?.id,
+        //     prefix: decoded?.prefix,
+        //     firstName: decoded?.firstname,
+        //     lastName: decoded?.lastName,
+        //     email: decoded?.email,
+        //     phone: decoded?.phone,
+        //     idLine: decoded?.idLine
+            
+        // }
         next()
     })
 }

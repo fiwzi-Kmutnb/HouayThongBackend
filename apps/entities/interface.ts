@@ -7,3 +7,16 @@ export interface ServiceReponse {
         data?: any;
     };
 }
+export interface User {
+    id: string;
+    prefix?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    idLine?: string;
+}
+
+export interface CustomRequest extends Request {
+    users?: User;
+}
