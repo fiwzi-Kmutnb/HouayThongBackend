@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
-    "start": "node src/index.ts",
-    "prisma:build": "npx prisma db push && npx prisma generate"
+    "dev": "nodemon apps/index.ts",
+    "start": "node apps/index.ts",
+    "prisma:build": "pnpm prisma db push && pnpm prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.14.11",
     "express": "^4.19.2",
     "ts-node": "^10.9.2",
