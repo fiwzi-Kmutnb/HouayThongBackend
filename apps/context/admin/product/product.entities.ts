@@ -2,10 +2,11 @@ import { Request } from 'express';
 
 interface Product {
     name: string
-    price: number
+    price: string
     description: string
-    quantity: number
+    quantity: string
     category_id: string
+    filterImage: string[]
 }
 
 export type ProductURequest = Request<{ id: string }, never, Product>;

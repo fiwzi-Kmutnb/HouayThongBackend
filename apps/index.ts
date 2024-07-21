@@ -13,6 +13,7 @@ app.use('/api/v1/users/address',isLogin,require('./context/user/address/address.
 app.use('/api/v1/users/auth',require('./context/user/auth/auth.controller'));
 
 app.use('/api/v1/admin/category',require('./context/admin/category/category.controller'));
+app.use('/api/v1/admin/product',require('./context/admin/product/product.controller'));
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
