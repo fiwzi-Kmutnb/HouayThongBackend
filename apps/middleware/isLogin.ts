@@ -31,28 +31,6 @@ export default function isLogin(req: Request<never,never,never,never,never>, res
             })
         } 
         req.users = decoded as any
-
-        // req.users = {
-        //     id: decoded?.id,
-        //     prefix: decoded?.prefix,
-        //     firstName: decoded?.firstname,
-        //     lastName: decoded?.lastName,
-        //     email: decoded?.email,
-        //     phone: decoded?.phone,
-        //     idLine: decoded?.idLine
-        // }
-        // req.users
-        // req.conf
-        // req.users = {
-        //     id: decoded?.id,
-        //     prefix: decoded?.prefix,
-        //     firstName: decoded?.firstname,
-        //     lastName: decoded?.lastName,
-        //     email: decoded?.email,
-        //     phone: decoded?.phone,
-        //     idLine: decoded?.idLine
-            
-        // }
         next()
     })
 }

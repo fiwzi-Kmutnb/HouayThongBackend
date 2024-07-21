@@ -14,33 +14,57 @@ datasource db {
 }
 
 model accounts {
-  id         String   @id @default(uuid())
-  email      String   @unique
+  id         String    @id @default(uuid())
+  email      String    @unique
   password   String
   prefix     String
   first_name String
   last_name  String
   phone      String
   idLine     String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  isAdmin    Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
   addressCol address[]
 }
 
 model address {
-  id String @id @default(cuid())
-  accountCol accounts @relation(fields: [accountID], references: [id])
-  accountID String
-  nameReceiver String
+  id            String    @id @default(cuid())
+  accountCol    accounts  @relation(fields: [accountID], references: [id])
+  accountID     String
+  nameReceiver  String
   phoneReceiver String
-  country String
-  province String
-  district String
-  subDistrict String
+  country       String
+  province      String
+  district      String
+  subDistrict   String
   addressDetail String?
-  postalCode String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  deletedAt DateTime?
+  postalCode    String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
 }
 
+model categories {
+  id        String     @id @default(cuid())
+  name      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  deletedAt DateTime?
+  products  products[]
+}
+
+model products {
+  id          String     @id @default(cuid())
+  name        String
+  price       Float      @default(0)
+  quantity    Int        @default(0)
+  description String
+  mainImage   String
+  subImage    String[]
+  categoryCol categories @relation(fields: [categoryID], references: [id])
+  categoryID  String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  deletedAt   DateTime?
+}

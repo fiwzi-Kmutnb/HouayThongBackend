@@ -16,7 +16,3 @@ export interface User {
     phone?: string;
     idLine?: string;
 }
-
-export interface CustomRequest extends Request {
-    users?: User;
-}
