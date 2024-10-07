@@ -14,7 +14,14 @@ export default {
                 result: true,
                 status: "success",
                 message: "ดึงข้อมูลสำเร็จ",
-                data: await prisma.products.findMany()
+                data: await prisma.products.findMany({
+                    where: {
+                        deletedAt: null
+                    },
+                    include: {
+                        categoryCol: true
+                    }
+                })
             }
         }
     },
@@ -48,7 +55,8 @@ export default {
     },
     ProductCreateService: async (req: ProductCRequest): Promise<ServiceReponse> => {
         const { name, price, category_id, description, quantity } = req.body
-        const { mainImage, subImage } = req.files as { mainImage: UploadedFile | null, subImage: UploadedFile | UploadedFile[] | null };
+        const mainImage = (req.files as { mainImage: UploadedFile | null, subImage: UploadedFile | UploadedFile[] | null })?.mainImage;
+        const subImage = (req.files as { mainImage: UploadedFile | null, subImage: UploadedFile | UploadedFile[] | null })?.subImage;
         let MainImage: string = "";
         let SubImage: string[] = [];
         if (!mainImage)
@@ -158,7 +166,9 @@ export default {
     ProductUpdateService: async (req: ProductURequest): Promise<ServiceReponse> => {
         const { id } = req.params
         const { name, price, category_id, description, quantity, filterImage } = req.body
-        const { mainImage, subImage } = req.files as { mainImage: UploadedFile | null, subImage: UploadedFile | UploadedFile[] | null };
+        const mainImage = (req.files as { mainImage: UploadedFile | null, subImage: UploadedFile | UploadedFile[] | null })?.mainImage;
+        const subImage = (req.files as { mainImage: UploadedFile | null, subImage: UploadedFile | UploadedFile[] | null })?.subImage;
+
         let MainImage: string = "";
         let SubImage: string[] = [];
         const check = await prisma.products.findUnique({
