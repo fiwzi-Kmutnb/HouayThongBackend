@@ -13,7 +13,7 @@ router.post('/login',DTO.AuthLoginDTO, async (req: AuthLoginRequest, res: Respon
 })
 
 router.post('/register',DTO.AuthRegisterDTO, async (req: AuthRegisterRequest, res: Response) => {
-    const { status, message } = await authService.AuthLoginService(req);
+    const { status, message } = await authService.AuthRegisterService(req);
     return res.status(status).json(message);
 })
 

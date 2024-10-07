@@ -8,10 +8,10 @@ interface AuthLogin {
 interface AuthRegister {
     email: string;
     password: string;
-    prefix: string;
+    // prefix: string;
     firstname: string;
     lastname: string;
-    phone: string;
+    // phone: string;
     lineID: string;
 }
 

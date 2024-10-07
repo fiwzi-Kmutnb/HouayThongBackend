@@ -56,7 +56,7 @@ export default {
         }
     },
     AuthRegisterService: async (req: AuthRegisterRequest): Promise<ServiceReponse> => {
-        const { email, password, prefix, firstname, lastname, phone, lineID } = req.body;
+        const { email, password, firstname, lastname, lineID } = req.body;
         const user = await prisma.accounts.findFirst({
             where: {
                 email: email
@@ -79,11 +79,11 @@ export default {
             data: {
                 email: email,
                 password: hashPassword,
-                prefix: prefix,
+                prefix: "-",
                 first_name: firstname,
                 last_name: lastname,
-                phone: phone,
-                idLine: lineID
+                phone: "-",
+                idLine: lineID || "-"
             }
         })
 
@@ -94,7 +94,7 @@ export default {
             firstname: userCreate.first_name,
             lastname: userCreate.last_name,
             phone: userCreate.phone,
-            lineID: userCreate.idLine,
+            lineID: userCreate.idLine || "-",
         }, process.env.JWT_SECRET || "1234", { expiresIn: '30d' });
 
         return {
